@@ -9,7 +9,7 @@ import authRouter from './api_server/routes/auth'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 dotenv.config()
-require('./database')
+require('./config/database')
 require('./auth/passport')
 
 const app = express()
