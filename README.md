@@ -33,7 +33,7 @@ npm run tsc
 npm run start
 ```
 
-Run for a production environment with `pm2`
+Run for a production environment with [`pm2`](https://pm2.keymetrics.io/)
 ```bash
 pm2 start app.js
 ```
