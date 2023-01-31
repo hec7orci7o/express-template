@@ -5,8 +5,8 @@ import passport from 'passport'
 
 const router = express.Router()
 
-router.post('/sign-in', authCtrl.signIn)
-router.post('/sign-up', userMiddleware.userExists, authCtrl.signUp)
-router.post('/sign-out', passport.authenticate('jwt', { session: false }), authCtrl.logout)
+router.post('/sign-in', userMiddleware.userPassExists, authCtrl.signIn)
+router.post('/sign-up', userMiddleware.userBlockExists, authCtrl.signUp)
+router.post('/sign-out', passport.authenticate('jwt', { session: false }), authCtrl.signOut)
 
 export default router

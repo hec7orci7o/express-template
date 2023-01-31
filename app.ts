@@ -7,9 +7,9 @@ import { stamp } from './api_server/middlewares/timestamp'
 import indexRouter from './api_server/routes/index'
 import authRouter from './api_server/routes/auth'
 import cors from 'cors'
+import connectDB from './config/database'
 import * as dotenv from 'dotenv'
 dotenv.config()
-require('./config/database')
 require('./auth/passport')
 
 const app = express()
@@ -22,8 +22,12 @@ app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-const PORT = process.env.PORT ?? 4000
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`))
+const PORT = process.env.PORT ?? 3000
+app.listen(PORT, () => {
+  connectDB()
+    .then(() => console.log('Server is running on port', PORT))
+    .catch((err) => console.error(err))
+})
 
 app.use('/api/v1', stamp)
 app.use('/api/v1', indexRouter)

@@ -30,7 +30,7 @@ export const signIn = (req: Request, res: Response): void => {
       })
 
       return res.status(200).json({
-        message: 'user' + String(user.username) + 'logged in successfully'
+        message: 'user ' + String(user.username) + ' logged in successfully'
       })
     }).catch((error: any) => {
       console.error(error)
@@ -57,7 +57,7 @@ export const signUp = (req: Request, res: Response): void => {
   res.send('User created')
 }
 
-export const logout = (_req: Request, res: Response): void => {
+export const signOut = (_req: Request, res: Response): void => {
   res.clearCookie('api-auth')
   res.send('User logged out')
 }

@@ -9,13 +9,11 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # If you are building your code for production
-RUN npm ci --save-prod
+# RUN npm ci --save-prod
+RUN npm install
 
 # Bundle app source
 COPY ./.env .
 COPY ./build .
-
-EXPOSE 3000
-EXPOSE 27017
 
 CMD [ "node", "app.js" ]
