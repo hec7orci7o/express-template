@@ -33,6 +33,11 @@ npm run tsc
 npm run start
 ```
 
+Run for a production environment with `pm2`
+```bash
+pm2 start app.js
+```
+
 Compile for docker
 ```bash
 docker-compose up -d
