@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv'
 import mongoose from 'mongoose'
 dotenv.config()
 
-const CONNECTION_URI = process.env.DATABASE_URI ?? 'mongodb://localhost:27017/chess'
+const CONNECTION_URI = process.env.DATABASE_URI ?? 'mongodb://127.0.0.1:27017/example'
 mongoose.set('strictQuery', true)
 mongoose
   .connect(CONNECTION_URI)

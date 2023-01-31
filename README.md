@@ -21,9 +21,21 @@
 
 ## Getting Started
 
-Runs the developer server
+Run for a development environment
+
 ```bash
+npm run dev
+```
+
+Run for a production environment
+```bash
+npm run tsc
 npm run start
+```
+
+Compile for docker
+```bash
+docker-compose up -d
 ```
 
 ## Learn More
