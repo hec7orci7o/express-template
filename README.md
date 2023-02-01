@@ -1,5 +1,6 @@
 # express-template  [![Production CI](https://github.com/Hec7or-Uni/chess-backend/actions/workflows/production.yml/badge.svg)](https://github.com/Hec7or-Uni/chess-backend/actions/workflows/production.yml)
 
+![Beta](https://img.shields.io/badge/Status-Beta-red)
 ![node](https://img.shields.io/badge/node-16.x-blue)
 ![npm](https://img.shields.io/badge/npm-8.15.0-blue)
 
