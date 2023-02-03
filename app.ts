@@ -12,10 +12,6 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 require('./auth/passport')
 
-connectDB()
-  .then(() => console.log('MongoDB has been connected'))
-  .catch((err) => console.error(err))
-
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -33,6 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => {
   console.log(`Server is running → PORT ${String(PORT)}`)
+  connectDB()
+    .then(() => console.log('MongoDB has been connected'))
+    .catch((err) => console.error(err))
 })
 
 app.use('/api/v1', stamp)
