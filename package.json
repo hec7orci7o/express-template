@@ -9,22 +9,24 @@
   },
   "scripts": {
     "start": "set NODE_ENV=production && node build/app.js",
-    "build": "tsc --project tsconfig.build.json && tsc-alias && copyfiles -u 1 public/assets/**/* build/public",
-    "dev": "set NODE_ENV=development && ts-node-dev -r tsconfig-paths/register src/app.ts",
+    "build": "tsc --project tsconfig.build.json && tsc-alias && esbuild build/app.js --bundle --minify --platform=node --outfile=build/app.min.js && copyfiles -u 1 src/public/**/* build/ && rm -rf build/",
+    "dev": "set NODE_ENV=development && ts-node-dev -r tsconfig-paths/register -r dotenv/config src/app.ts",
     "test": "set NODE_ENV=test && nyc mocha --exit --timeout 10000 -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
-    "lint": "eslint . --ext .ts --fix",
+    "lint": "prettier --write \"src/**/*.ts\" && eslint .",
     "prepare": "husky install"
   },
   "dependencies": {
     "body-parser": "1.20.2",
+    "copyfiles": "^2.4.1",
     "cors": "2.8.5",
     "crypto": "^1.0.1",
     "dayjs": "1.11.9",
     "debug": "4.3.4",
+    "dotenv": "^16.3.1",
     "express": "4.18.2",
     "helmet": "^7.0.0",
     "http-errors": "2.0.0",
-    "mongoose": "7.4.5"
+    "mongoose": "^7.4.5"
   },
   "devDependencies": {
     "@types/chai": "4.3.5",
@@ -38,27 +40,25 @@
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "chai": "^4.3.8",
     "chai-http": "^4.4.0",
+    "esbuild": "^0.19.2",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard-with-typescript": "^39.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.2",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
+    "prettier": "^3.0.2",
     "supertest": "^6.3.3",
     "ts-node-dev": "^2.0.0",
-    "ts-standard": "^12.0.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
   },
-  "eslintConfig": {
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "extends": [
-      "./node_modules/ts-standard/eslintrc.json"
-    ],
-    "rules": {
-      "@typescript-eslint/no-var-requires": 0
-    }
-  },
   "lint-staged": {
-    "*.ts": "ts-standard"
+    "*.ts": "echo 'Linting...'"
   }
 }

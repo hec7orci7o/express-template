@@ -1,5 +1,5 @@
 import express from 'express'
-import * as indexCtrl from '@/api_server/controllers/main'
+import * as indexCtrl from '@/api_server/controllers/health'
 
 const router = express.Router()
 

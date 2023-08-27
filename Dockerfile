@@ -1,19 +1,27 @@
-FROM node:16
+FROM node:20-alpine
 
-# Create app directory
+# Create a non-root user
+RUN addgroup -S nodejs && adduser -S express -G nodejs
+
+# Set the working directory for the app
 WORKDIR /usr/src/app
 
+# Give ownership of the working directory to the non-root user
+RUN chown -R express:nodejs /usr/src/app
+
 # Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
+RUN npm install -g npm@latest
+RUN npm ci --omit=dev --ignore-scripts
 
-# If you are building your code for production
-# RUN npm ci --save-prod
-RUN npm install
+# Copy the built app source
+COPY ./build/app.min.js .
 
-# Bundle app source
-COPY ./.env .
-COPY ./build .
+# Expose the required ports
+EXPOSE 3000
 
-CMD [ "node", "app.js" ]
+# Switch to the non-root user before running the app
+USER express
+
+# Run the Node.js app
+CMD ["node", "app.min.js"]

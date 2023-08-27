@@ -12,36 +12,43 @@
 ## Folder structure
 
 - `app.ts`: This is the main file of your project, it could be the entry point of your application and where you will set up your server.
-- `config`: This directory contains any configuration files, such as database connection settings, that the application needs to run.
 - `test`: this folder contains tests to check the correct operation of the application.
 - `api/controllers`: This directory contains the application's controllers, which are responsible for handling user input and updating the model and view accordingly.
 - `api/middleware`: This folder stores intermediate functionalities that act as middelwares for filtering certain requests.
 - `api/models`: This directory contains the application's data models, which are responsible for handling data and business logic.
 - `api/routes`: This directory contains the application's routing files, which map URLs to specific controllers and actions.
-- `api/views`: This directory contains the application's views, which are responsible for displaying data to the user.
 
 ## Getting Started
 
-Run for a development environment
+### Run for a development environment
 
 ```bash
 npm run dev
 ```
 
-Run for a production environment
+###  Run for a production environment
+
+#### Command Line
+> **Note**
+> this version requires to have port `3000` open on the router.
+
 ```bash
-npm run tsc
+npm run build
 npm run start
 ```
 
-Run for a production environment with [`pm2`](https://pm2.keymetrics.io/)
+#### Docker
+
+Build Docker image:
+
 ```bash
-pm2 start app.js
+docker build -t express-template:latest .
 ```
 
-Compile for docker
+Run the container: 
+
 ```bash
-docker-compose up -d
+docker run -p 3000:3000 --env-file .env express-template:latest
 ```
 
 ## Learn More
