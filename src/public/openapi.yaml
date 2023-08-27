@@ -1,0 +1,35 @@
+openapi: 3.1.0
+info:
+  title: express-template
+  description:
+    $ref: description.md
+tags:
+  - name: Health
+    description: Allows interacting with the health service to check if the server is reachable.
+  - name: Auth
+    description: Allows interacting with the session service to achieve objectives such as identifying users, registering them, etc.
+x-tagGroups:
+  - name: Health
+    tags:
+      - Health
+  - name: Auth
+    tags:
+      - Auth
+      - OAuth 2.0
+servers:
+  - url: 'https://localhost:3000/v1'
+    description: Sandbox server (REST API)
+
+paths:
+  /health/ping:
+    $ref: 'paths/ping/ping.yaml'
+  /health/secure-ping:
+    $ref: 'paths/ping/securePing.yaml'
+  /auth/sign-up:
+    $ref: 'paths/auth/signUp.yaml'
+  /auth/sign-in:
+    $ref: 'paths/auth/signIn.yaml'
+components:
+  securitySchemes:
+    api_key:
+      $ref: 'components/securitySchemes/api_key.yaml'

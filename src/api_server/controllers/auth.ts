@@ -2,6 +2,27 @@ import { Request, Response } from 'express'
 import { setStatus } from '@/lib/utils'
 import { UserModel } from '@/api_server/models/user'
 import { pbkdf2Sync, randomBytes } from 'crypto'
+import jwt from 'jsonwebtoken'
+
+interface tmpUser {
+  id: string
+  email: string
+  username: string
+}
+
+function createToken(user: tmpUser): string | jwt.JwtPayload {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      username: user.username
+    },
+    String(process.env.SECRET_KEY),
+    {
+      expiresIn: '1h'
+    }
+  )
+}
 
 export const signUp = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -10,7 +31,7 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
     // Verificar si el usuario ya existe por su correo electrónico
     const existingUser = await UserModel.findOne({ email })
     if (existingUser != null) {
-      res.status(409).json({ message: 'Conflict' })
+      res.status(409).json({ status: setStatus(req, 409, 'Conflict') })
       return
     }
 
@@ -23,13 +44,26 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
       64,
       'sha512'
     ).toString('hex')
-    const newUser = new UserModel({ username, email, hashedPassword, salt })
-    await newUser.save()
 
-    res.status(201).json({ message: 'Created' })
+    const newUser = await UserModel.create({
+      username,
+      email,
+      password: hashedPassword,
+      salt
+    })
+
+    res.status(201).json({
+      data: {
+        id: newUser.id,
+        username,
+        email
+      },
+      status: setStatus(req, 201, 'Internal Server Error')
+    })
   } catch (error) {
-    console.error('Error en el registro:', error)
-    res.status(500).json({ message: 'Internal Server Error' })
+    res
+      .status(500)
+      .json({ status: setStatus(req, 500, 'Internal Server Error') })
   }
 }
 
@@ -40,7 +74,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
     // Buscar el usuario por el correo electrónico
     const user = await UserModel.findOne({ email })
     if (user == null) {
-      res.status(404).json({ message: 'Usuario no encontrado.' })
+      res.status(404).json({ status: setStatus(req, 404, 'Not Found') })
       return
     }
 
@@ -54,18 +88,29 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
     ).toString('hex')
 
     // Comparar el hash generado con el hash almacenado en la base de datos
-    if (hashedPassword !== user.password.toString('hex')) {
-      res.status(401).json({ message: 'Credenciales incorrectas.' })
+    if (hashedPassword !== String(user.password)) {
+      res.status(401).json({ status: setStatus(req, 401, 'Unathorized') })
       return
     }
 
-    res.status(200).json({ message: 'Successfull' })
-  } catch (error) {
-    console.error('Error en el inicio de sesión:', error)
-    res.status(500).json({ message: 'Internal Server Error' })
-  }
-}
+    const token = createToken({
+      id: user.id,
+      email: user.email,
+      username: user.username
+    })
 
-export const signOut = (req: Request, res: Response): void => {
-  res.status(200).json({ status: setStatus(req, 0, 'pong') })
+    res.status(200).json({
+      data: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        token
+      },
+      status: setStatus(req, 200, 'Internal Server Error')
+    })
+  } catch (error) {
+    res
+      .status(500)
+      .json({ status: setStatus(req, 500, 'Internal Server Error') })
+  }
 }

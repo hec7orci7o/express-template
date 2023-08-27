@@ -1,0 +1,89 @@
+post:
+  servers: 
+    - url: 'http://localhost:4000/v1'
+    - url: 'https://api.gracehopper.xyz/v1'
+  tags:
+    - Auth
+  summary: Sign Up
+  description: Allows you to register a new user to the system.<br>After creating a new user, the system will send a verification email to the user's email address.
+  operationId: sign-up
+  security: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+            - email
+            - password
+          properties: 
+            username: 
+              type: string
+              example: johndoe
+              uniqueItems: true
+              description: Nickname with which the user will be identified within the platform
+            email: 
+              type: string
+              example: johndoe@example.com
+              uniqueItems: true
+              description: e-mail address with which the user registers
+            password: 
+              type: string
+              format: password
+              example: qwerty
+              minLength: 8
+              description: Password to protect the user's profile
+  responses:
+    201:
+      description: Created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: "../../components/schemas/user.yaml"
+              status:
+                $ref: "../../components/schemas/status.yaml"
+          examples:
+            example:
+              summary: ""
+              value:
+                data:
+                  id: 6427012084270ee46cd8300c
+                  avatar: "https://api.gracehopper.xyz/assets/avatar"
+                  username: johndoe
+                  email: "johndoe@example.com"
+                  google: true
+                  verified: false
+                  createdAt: 2023-03-30T17:24:17.230Z
+                  updatedAt: 2023-03-30T17:24:17.230Z
+                status:
+                  timestamp: 2023-03-30T17:24:17.230Z
+                  error_code: 0
+                  error_message: "Successful"
+                  elapsed: 0
+    400:
+      description: Bad Request
+      $ref: '../../components/schemas/responses/400.yaml'
+    409:
+      description: Conflict
+      $ref: '../../components/schemas/responses/409.yaml'
+    429:
+      description: Too Many Request
+      $ref: '../../components/schemas/responses/429.yaml'
+    500:
+      description: Internal Server Error
+      $ref: '../../components/schemas/responses/500.yaml'
+
+  x-codeSamples:
+    - lang: cURL
+      source: |
+        curl  --location 'https://api.gracehopper.xyz/v1/auth/sign-up' \
+              --header 'Content-Type: application/json' \
+              --data-raw '{
+                  "username": "johndoe",
+                  "email": "johndoe@example.com",
+                  "password": "12345678"
+              }'

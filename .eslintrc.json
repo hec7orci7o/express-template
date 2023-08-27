@@ -19,12 +19,14 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["src/public/**/*"],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/no-confusing-void-expression": "off"
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }

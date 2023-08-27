@@ -1,0 +1,29 @@
+get:
+  servers: 
+    - url: 'http://localhost:4000/v1'
+    - url: 'https://api.gracehopper.xyz/v1'
+  tags:
+    - Health
+  summary: Secure Ping
+  description: Check if I have access permissions
+  operationId: securePing
+  security: 
+    - api_key: []
+  responses:
+    200:
+      description: Successful
+      $ref: '../../components/schemas/responses/200.yaml'
+    401:
+      description: Unauthorized
+      $ref: '../../components/schemas/responses/401.yaml'
+    429:
+      description: Too Many Request
+      $ref: '../../components/schemas/responses/429.yaml'
+    500:
+      description: Internal Server Error
+      $ref: '../../components/schemas/responses/500.yaml'
+  x-codeSamples:
+    - lang: cURL
+      source: |
+        curl  --location 'https://api.gracehopper.xyz/v1/health/secure-ping' \
+              --header 'Cookie: api-auth=JWT_TOKEN'

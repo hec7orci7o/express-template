@@ -5,6 +5,5 @@ const router = express.Router()
 
 router.post('/sign-up', authCtrl.signUp)
 router.post('/sign-in', authCtrl.signIn)
-router.post('/sign-out', authCtrl.signOut)
 
 export default router

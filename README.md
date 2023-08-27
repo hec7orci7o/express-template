@@ -1,4 +1,4 @@
-# express-template  [![Production CI](https://github.com/hec7orci7o/express-template/actions/workflows/production.yml/badge.svg)](https://github.com/hec7orci7o/express-template/actions/workflows/production.yml)
+# express-template [![Production CI](https://github.com/hec7orci7o/express-template/actions/workflows/production.yml/badge.svg)](https://github.com/hec7orci7o/express-template/actions/workflows/production.yml)
 
 ![Beta](https://img.shields.io/badge/Status-Beta-red)
 ![node](https://img.shields.io/badge/node-20.x-blue)
@@ -23,16 +23,19 @@
 ### Run for a development environment
 
 ```bash
+npm run ci
 npm run dev
 ```
 
-###  Run for a production environment
+### Run for a production environment
 
 #### Command Line
+
 > **Note**
 > this version requires to have port `3000` open on the router.
 
 ```bash
+npm run ci
 npm run build
 npm run start
 ```
@@ -45,7 +48,7 @@ Build Docker image:
 docker build -t express-template:latest .
 ```
 
-Run the container: 
+Run the container:
 
 ```bash
 docker run -p 3000:3000 --env-file .env express-template:latest
