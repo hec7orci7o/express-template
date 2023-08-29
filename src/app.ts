@@ -4,6 +4,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import path from 'path'
 import { setStatus } from '@/lib/utils'
+import { Limiter, SpeedLimiter } from '@/api_server/middlewares/limiters'
 import { stamp } from '@/api_server/middlewares/timestamp'
 import { connectDB } from '@/lib/database'
 
@@ -23,6 +24,7 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(Limiter, SpeedLimiter)
 app.use('/v1', stamp)
 app.use('/v1/health', healthRouter)
 app.use('/v1/auth', authRouter)
