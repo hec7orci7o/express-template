@@ -8,10 +8,10 @@
     "npm": "9.8.1"
   },
   "scripts": {
-    "start": "node build/app.js",
-    "build": "tsc --project tsconfig.build.json && tsc-alias && esbuild build/app.js --bundle --minify --platform=node --outfile=build/app.min.js && copyfiles -u 1 src/public/**/* build/ && rm -rf build/",
+    "start": "node build/app.min.js",
+    "build": "tsc --project tsconfig.build.json && tsc-alias && esbuild build/app.js --bundle --minify --platform=node --outfile=build/app.min.js && copyfiles -u 1 src/public/**/* build/",
     "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/app.ts",
-    "test": "nyc mocha --exit -r ts-node/register -r tsconfig-paths/register src/test/**/*.ts",
+    "test": "nyc mocha --exit -r ts-node/register -r tsconfig-paths/register src/test/*.ts",
     "lint": "prettier --write src/**/*.ts && eslint src",
     "prepare": "husky install"
   },

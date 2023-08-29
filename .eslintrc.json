@@ -19,7 +19,10 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["src/public/**/*"],
+  "ignorePatterns": [
+    "src/public/**/*",
+    "src/test/*"
+  ],
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/consistent-type-imports": "off",
