@@ -3,7 +3,7 @@ name: Production CI
 on:
   push:
     branches: [main]
-  pull_request: 
+  pull_request:
     branches: [main]
 
 env:
@@ -19,45 +19,45 @@ jobs:
     name: install 📦
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - uses: actions/setup-node@v3
-      with:
-        cache: npm
-        node-version: 16
-    - name: Install Dependencies
-      run: npm ci
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
 
   lint:
     name: lint 🪅
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - uses: actions/setup-node@v3
-      with:
-        cache: npm
-        node-version: 16
-    - name: Install Dependencies
-      run: npm ci
-    - name: Lint
-      run: npm run lint
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
 
   test:
     name: test 🧪
     needs: [install]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - uses: actions/setup-node@v3
-      with:
-        cache: npm
-        node-version: 16
-    - name: Install Dependencies
-      run: npm ci
-    - name: Test
-      run: npm run test
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Test
+        run: npm run test

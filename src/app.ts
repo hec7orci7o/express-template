@@ -11,6 +11,10 @@ import { connectDB } from '@/lib/database'
 import healthRouter from '@/api_server/routes/health'
 import authRouter from '@/api_server/routes/auth'
 
+connectDB()
+  .then(() => console.log('MongoDB has been connected'))
+  .catch((err) => console.error(err))
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -46,9 +50,6 @@ app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => {
   console.log(`Server is running → PORT ${String(PORT)}`)
-  connectDB()
-    .then(() => console.log('MongoDB has been connected'))
-    .catch((err) => console.error(err))
 })
 
 export default app
