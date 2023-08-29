@@ -6,18 +6,18 @@
 
 # Introduction
 
-The Reign API is a set of high-performance RESTful JSON endpoints designed specifically to meet the critical functionality of our application.
+The [your-api-name] API is a set of high-performance RESTful JSON endpoints designed specifically to meet the critical functionality of our application.
 
-This API reference includes all the technical documentation developers need to maintain and interface with the service. Additional answers to common questions can be found in the [Reign API FAQ](https://reign.gracehopper.xyz/faq).
+This API reference includes all the technical documentation developers need to maintain and interface with the service. Additional answers to common questions can be found in the [link-to-your-faq-page]().
 
 # Quick Start Guide
 
-For developers eager to hit the ground running with the Reign API here are a few quick steps to make your first call with the API.
+For developers eager to hit the ground running with the [your-api-name] API here are a few quick steps to make your first call with the API.
 
-1. **Sign up for free.** You can sign up at reign.gracehopper.xyz - This is our live production environment with the latest data.
+1. **Sign up for free.** You can sign up at [your-site-dns] - This is our live production environment with the latest data.
 2. **Sign in to gain access.** Once you register and confirm your account you'll have all the API endpoints at your disposal. remember that some require authentication and to access them you will need to log in.
-3. **Make a test call using your key.** You can use the code examples below to perform a test call with the programming language of your choice. This example makes a ping call to test the connection. Be sure that you are using the API domain api.gracehopper.xyz while testing.
-4. **Postman Collection** To help with development, we provide a fully featured postman collection that you can import and use immediately! You can download it [here](https://www.postman.com/downloads/). After you set up Postman, you can import Reign's latest Postman collection by adding this URL: https://api.postman.com/collections/17239372-07f36979-473f-4f23-b168-648841a32ce1?access_key=PMAT-01GYPTWD0DS0736ZT47P8J49RF in the import collection secction in your main page inside postman.
+3. **Make a test call using your key.** You can use the code examples below to perform a test call with the programming language of your choice. This example makes a ping call to test the connection. Be sure that you are using the API domain [your-api-dns] while testing.
+4. **Postman Collection** To help with development, we provide a fully featured postman collection that you can import and use immediately! You can download it [here](https://www.postman.com/downloads/). After you set up Postman, you can import [your-service-name]'s latest Postman collection by adding this URL: [url-to-your-postman-collection] in the import collection secction in your main page inside postman.
 5. **Implement your application.** Now that you've confirmed your API Key is working, get familiar with the API by reading the rest of this API Reference and start building your application!
 
 **\*Note:** Making HTTP requests on the client side with Javascript is currently prohibited through CORS configuration. This is to protect your API Key which should not be visible to users of your application so your API Key is not stolen. Secure your API Key by routing calls through your own backend service.\*
@@ -27,13 +27,13 @@ For developers eager to hit the ground running with the Reign API here are a few
   <details class="nested">
     <summary>cURL</summary>
     
-    curl --location 'https://api.gracehopper.xyz/v1/health/ping'
+    curl --location 'https://your-domain/v1/health/ping'
 
   </details>
   <details class="nested">
     <summary>Node.js</summary>
     
-    fetch("https://api.gracehopper.xyz/v1/health/ping")
+    fetch("https://your-domain/v1/health/ping")
       .then(response => response.json())
       .catch(error => console.log('error', error));
 
@@ -42,7 +42,7 @@ For developers eager to hit the ground running with the Reign API here are a few
     <summary>Python</summary>
     
     import requests
-    response = requests.request("GET", "https://api.gracehopper.xyz/v1/health/ping")
+    response = requests.request("GET", "https://your-domain/v1/health/ping")
     print(response.json())
 
   </details>
@@ -55,7 +55,7 @@ For developers eager to hit the ground running with the Reign API here are a few
       final dio = Dio();
 
       try {
-        final response = await dio.get('https://api.gracehopper.xyz/v1/health/ping');
+        final response = await dio.get('https://your-domain/v1/health/ping');
         print(response.data);
       } catch (e) {
         print('Error: $e');
@@ -72,38 +72,35 @@ For developers eager to hit the ground running with the Reign API here are a few
 
 <br>
 
-<video src="./postmanInstructions.mp4" controls="controls"></video>
+<video src="./assets/postmanInstructions.mp4" controls="controls"></video>
 
 # Authentication
 
 <h2>Acquiring an API Key</h2>
 
-Most HTTP requests made against the Reign API must be validated with an API Key. If you don't have an API Key yet visit the [website](https://reign.gracehopper.xyz/auth) and register for one.
+Most HTTP requests made against the [your-service-name] API must be validated with an API Key. If you don't have an API Key yet visit the [your-registration-page]() and register for one.
 
 <h2>Using Your API Key</h2>
 
-You may use any server side programming language that can make HTTP requests to target the Reign API. All requests should target domain https://api.gracehopper.xyz.
+You may use any server side programming language that can make HTTP requests to target the [your-service-name] API. All requests should target domain https://your-domain.
 
 You can supply your API Key in REST API calls in this way:
 
-- **Cookie:** Via a cookie named `api-auth`
+- **Cookie:** Via a cookie named `<service-name>-api-key` (NOT IMPLEMENTED)
+- **Headers:** Via a header named `x-api-key`
 
 **\*Security Warning:** It's important to secure your API Key against public access. The cookie option is strongly recommended over the custom header option for passing your API Key in a production environment.\*
 
-<h2>Connect with an Authenticated Socket</h2>
-
-To authenticate a socket connection you just need to add a **token** property as an extra header, containing a valid session token. If this property is not defined (or contains false, 0 or an empty value) the handshake is done but the socket will not be authenticated, so actions restricted to verified users cannot be perfomed. If the property is defined but the token it contains is not valid, the handshake will fail. Otherwise the handshake will success and the socket will be authenticated.
-
 # Endpoint Overview
 
-The Reign API is divided into 5 top-level categories
+The [your-service-name] API is divided into 5 top-level categories
 
 | Endpoint Category         | Description                                                      |
 | ------------------------- | ---------------------------------------------------------------- |
 | [/health/\*](#tag/Health) | Endpoints informing whether the api is accessible.               |
 | [/auth/\*](#tag/Auth)     | Endpoints handling authentication, credential recovery and more. |
 
-<h3>Users, games and tournaments endpoints provide 2 different ways of accessing data depending on purpose</h3>
+<h3>There may be other endpoints that offer different ways of accessing the data depending on their purpose.</h3>
 
 - **Listing endpoints:** Flexible paginated endpoints allow sorting and filtering of data lists such as games by gameType.
 - **Item endpoints:** Convenient ID-based resource endpoints allow you to extract information from a specific ID.
@@ -146,13 +143,13 @@ The `meta` object is only included in listing requests.
 
 <h2>Versioning</h2>
 
-The Reign API is versioned to guarantee new features and updates are non-breaking. The latest version of this API is `/v1/`
+The [your-service-name] API is versioned to guarantee new features and updates are non-breaking. The latest version of this API is `/v1/`
 
 # Errors and Rate Limits
 
 <h2>API Request Throttling</h2>
 
-Use of the Reign API is subject to API call rate limiting or "request throttling". This is the number of HTTP calls that can be made simultaneously or within the same minute with your API Key before receiving an HTTP 429 "Too Many Requests" throttling error. This limit scales with the usage tier and resets every 60 seconds. Please review our Best Practices for implementation strategies that work well with rate limiting.
+Use of the [your-service-name] API is subject to API call rate limiting or "request throttling". This is the number of HTTP calls that can be made simultaneously or within the same minute with your API Key before receiving an HTTP 429 "Too Many Requests" throttling error. This limit scales with the usage tier and resets every 60 seconds. Please review our Best Practices for implementation strategies that work well with rate limiting.
 
 <h2>HTTP Status Codes</h2>
 
@@ -168,46 +165,24 @@ The API uses standard HTTP status codes to indicate the success or failure of an
 
 A `Status` object is always included in the JSON response payload for both successful calls and failures when possible. During error scenarios you may reference the `error_code` and `error_message` properties of the Status object. One of the API error codes below will be returned if applicable otherwise the HTTP status code for the general error type is returned.
 
-| HTTP Status | Error Code                               | Error Message                                                                                |
-| :---------: | :--------------------------------------- | :------------------------------------------------------------------------------------------- |
-|     401     | 401 `API_KEY_INVALID`                    | This API Key is invalid.                                                                     |
-|     401     | 401 `API_KEY_MISSING`                    | API key missing.                                                                             |
-|     403     | 403 `API_KEY_REQUIRED`                   | An API Key is required for this call.                                                        |
-|     403     | 403 `API_KEY_DISABLED`                   | This API Key has been disabled. Please contact [support](https://reign.gracehopper.xyz/faq). |
-|     429     | 429 `API_KEY_MINUTE_RATE_LIMIT_REACHED`  | You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute.      |
-|     429     | 429 `API_KEY_DAILY_RATE_LIMIT_REACHED`   | You've exceeded your API Key's daily rate limit.                                             |
-|     429     | 429 `API_KEY_MONTHLY_RATE_LIMIT_REACHED` | You've exceeded your API Key's monthly rate limit.                                           |
-|     429     | 429 `IP_RATE_LIMIT_REACHED`              | You've hit an IP rate limit.                                                                 |
-
-<h2>Error Event Codes</h2>
-
-If some event sent from the client side causes an error, an `error` event will be sent as the only reply and the first event will have no effect. A `SocketError` object is always sent with this type of event. The error codes are related to the standard HTTP error status codes.
-
-| Error Code | Error Type                | Default Message                                |
-| :--------: | :------------------------ | :--------------------------------------------- |
-|    400     | `INVALID_PARAMETER`       | Invalid parameters.                            |
-|    400     | `NOT_YOUR_TURN`           | It is not your turn to move.                   |
-|    400     | `ILLEGAL_MOVE`            | Illegal move.                                  |
-|    401     | `MUST_BE_AUTHENTICATED`   | This action requires an authenticated socket.  |
-|    403     | `NOT_PLAYER_OF_THIS_GAME` | This socket is not player of this game.        |
-|    405     | `NOT_SUPPORTED_ACTION`    | This action is not supported by the game type. |
-|    409     | `GAME_NOT_READY`          | This game is not ready yet.                    |
-|    409     | `GAME_ALREADY_STARTED`    | This game has already been started.            |
-|    409     | `GAME_NOT_PAUSED`         | This game is not paused.                       |
-|    409     | `GAME_ALREADY_FINISHED`   | This game has already been finished.           |
-|    409     | `NOT_PLAYING_ANY_GAME`    | This socket is not playing any game.           |
-|    409     | `NOT_WATCHING_ANY_GAME`   | This socket is not watching any game.          |
-|    409     | `ALREADY_JOINED`          | This socket has already joined a room.         |
-|    409     | `ALREADY_PLAYING`         | This socket is already playing or in queue.    |
-|    500     | `INTERNAL_SERVER_ERROR`   | Internal server error.                         |
+| HTTP Status | Error Code                               | Error Message                                                                           |
+| :---------: | :--------------------------------------- | :-------------------------------------------------------------------------------------- |
+|     401     | 401 `API_KEY_INVALID`                    | This API Key is invalid.                                                                |
+|     401     | 401 `API_KEY_MISSING`                    | API key missing.                                                                        |
+|     403     | 403 `API_KEY_REQUIRED`                   | An API Key is required for this call.                                                   |
+|     403     | 403 `API_KEY_DISABLED`                   | This API Key has been disabled. Please contact [your-support-page]().                   |
+|     429     | 429 `API_KEY_MINUTE_RATE_LIMIT_REACHED`  | You've exceeded your API Key's HTTP request rate limit. Rate limits reset every minute. |
+|     429     | 429 `API_KEY_DAILY_RATE_LIMIT_REACHED`   | You've exceeded your API Key's daily rate limit.                                        |
+|     429     | 429 `API_KEY_MONTHLY_RATE_LIMIT_REACHED` | You've exceeded your API Key's monthly rate limit.                                      |
+|     429     | 429 `IP_RATE_LIMIT_REACHED`              | You've hit an IP rate limit.                                                            |
 
 # Best Practices
 
-This section contains a few recommendations on how to efficiently utilize the Reign API for your enterprise application, particularly if you already have a large base of users for your application.
+This section contains a few recommendations on how to efficiently utilize the [your-service-name] API for your enterprise application, particularly if you already have a large base of users for your application.
 
 <h2>Implement a Caching Strategy If Needed</h2>
 
-There are standard legal data safeguards included in the [Commercial Terms](https://reign.gracehopper.xyz/terms) of Use that app developers should be aware of. These conditions help prevent unauthorized scraping and redistribution of Reign data, but are intentionally worded to allow legitimate local caching of system data to support the operation of your application. If your application has a significant user base and you are concerned about staying within API throttling limits, consider implementing a data caching strategy.
+There are standard legal data safeguards included in the [your-Commercial Terms]() of Use that app developers should be aware of. These conditions help prevent unauthorized scraping and redistribution of [your-service-name] data, but are intentionally worded to allow legitimate local caching of system data to support the operation of your application. If your application has a significant user base and you are concerned about staying within API throttling limits, consider implementing a data caching strategy.
 
 For example, instead of making a call to /users every time one of your application's users needs to get the stats for a group of users, you could pre-fetch and cache the latest user data in your application's local database every 60 seconds. This would only require 1 API call, /users, every 60 seconds. Then, every time one of your application's users needs to load a custom list of users, you could simply pull this latest market data from your local cache without the overhead of additional calls. This type of optimization is practical for customers with large and demanding user bases.
 

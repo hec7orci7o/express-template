@@ -8,11 +8,11 @@
     "npm": "9.8.1"
   },
   "scripts": {
-    "start": "set NODE_ENV=production && node build/app.js",
+    "start": "node build/app.js",
     "build": "tsc --project tsconfig.build.json && tsc-alias && esbuild build/app.js --bundle --minify --platform=node --outfile=build/app.min.js && copyfiles -u 1 src/public/**/* build/ && rm -rf build/",
-    "dev": "set NODE_ENV=development && ts-node-dev -r tsconfig-paths/register -r dotenv/config src/app.ts",
-    "test": "set NODE_ENV=test && nyc mocha --exit --timeout 10000 -r ts-node/register -r tsconfig-paths/register \"test/**/*.ts\"",
-    "lint": "prettier --write \"src/**/*.ts\" && eslint ./src",
+    "dev": "ts-node-dev -r tsconfig-paths/register -r dotenv/config src/app.ts",
+    "test": "nyc mocha --exit --timeout 10000 -r ts-node/register -r tsconfig-paths/register src/test/**/*.ts",
+    "lint": "prettier --write src/**/*.ts && eslint src",
     "prepare": "husky install"
   },
   "dependencies": {
