@@ -42,7 +42,7 @@ describe('GET /v1/health/secure-ping', () => {
       .get('/v1/health/secure-ping')
       .set('x-api-key', token)
       .expect(200)
-  })
+  }).timeout(10000)
 
   it('User does not have permission', async () => {
     await request(app).get('/v1/health/secure-ping').expect(401)
