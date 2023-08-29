@@ -31,7 +31,6 @@ jobs:
 
   lint:
     name: lint 🪅
-    needs: install
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -48,7 +47,7 @@ jobs:
 
   test:
     name: test 🧪
-    needs: [install, lint]
+    needs: [install]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
